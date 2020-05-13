@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Plantarum</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/mainStyle.css">
+    <link rel="icon" type="image/png" href="img/icon.png" sizes="16x16">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <style>
+        h2 {
+            margin-left: 2em;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container-fluid" id="main">
+        <div class="row col-12">
+            <div id="logo" class="col-lg-1 col-md-2 col-sm-12">
+                <img src="img/icon.png" width="160" alt="logotipo">
+            </div>
+            <div class="titulo col-lg-11 col-md-10 col-sm-12">PLANTARUM</div>
+        </div>
+    </div>
+    <h2>Productos registrados</h2>
+    <!--Inyección de listados-->
+    <div class="section">
+        <div id="listados">
+        </div>
+        <div id="UD">
+            <h2>Gestión de Productos</h2>
+            <form name="gestionProductos">
+                <select name="sel" id="selector"></select>
+
+
+                <div class="form-row form-group">
+                    <div class="col-6">
+                        <label for="txtPrecio">Precio (€)</label>
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control" type="number" min="0" step="0.01" name="txtPrecio" id="txtPrecio"
+                            required>
+                    </div>
+                </div>
+                <div class="form-row form-group">
+                    <div class="col-6">
+                        <label for="selectTipo">Tipo de Producto</label>
+                    </div>
+                    <div class="col-6">
+                        <select class="form-control" name="selectTipo" id="selectTipo" onchange="changed_selectTipo();"
+                            required>
+                            <option selected>Seleccione</option>
+                            <option>Planta</option>
+                            <option>Maceta</option>
+                        </select>
+                    </div>
+                </div>
+                <!--TIPO PLANTA-->
+                <div id="condPlanta" class="oculto">
+                    <div class="form-row form-group">
+                        <div class="col-6">
+                            <label for="txtNombre">Nombre</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtNombre" id="txtNombre">
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="col-6">
+                            <label for="selectTamaño">Tamaño</label>
+                        </div>
+                        <div class="col-6">
+                            <select class="form-control" name="selectTamaño" id="selectTamaño">
+                                <option selected>Seleccione</option>
+                                <option>Pequeño</option>
+                                <option>Mediano</option>
+                                <option>Grande</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="col-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="chkFlor" id="chkFlor">
+                                <label class="form-check-label" for="chkFlor">Flor</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="chkFrutal" id="chkFrutal">
+                                <label class="form-check-label" for="chkFrutal">Frutal</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--TIPO MACETA-->
+                <div id="condMaceta" class="oculto">
+                    <div class="form-row form-group">
+                        <div class="col-6">
+                            <label for="txtColor">Color</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtColor" id="txtColor">
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="col-6">
+                            <label for="txtCapacidad">Capacidad (L)</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="number" min="0" step="0.5" name="txtCapacidad"
+                                id="txtCapacidad">
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="col-6">
+                            <label for="txtMaterial">Material</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtMaterial" id="txtMaterial">
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <script>
+                    // Ocultar/mostrar opciones del tipo de producto
+                    gestionProductos.selectTipo.selectedIndex = 0;
+                    function changed_selectTipo() {
+                        switch (gestionProductos.selectTipo.value) {
+                            case "Planta":
+                                document.getElementById("condPlanta").style.display = "block";
+                                document.getElementById("condMaceta").style.display = "none";
+                                break;
+                            case "Maceta":
+                                document.getElementById("condPlanta").style.display = "none";
+                                document.getElementById("condMaceta").style.display = "block";
+                                break;
+                            default:
+                                document.getElementById("condPlanta").style.display = "none";
+                                document.getElementById("condMaceta").style.display = "none";
+                        }
+                    }
+                </script>
+
+                <input type="button" value="Borrar Producto" name="btnBorrar">
+                <input type="button" value="Modificar Producto" name="btnModificar">
+            </form>
+        </div>
+
+    </div>
+    </div>
+    <script src="JS/formControl.js"></script>
+    <script src="JS/classes.js"></script>
+    <script>
+        document.getElementById("listados").innerHTML = window.opener.modelo.listarProductos();
+
+        let btnModificar = gestionProductos.btnModificar;
+        btnModificar.addEventListener('click', function (event) {
+            console.log("botón modificar clicado");
+            /*1.pillar codigo y los atributos comunes */
+            let codigo = gestionProductos.sel.value;
+            let tipo = gestionProductos.selectTipo.value;
+            let precio = gestionProductos.txtPrecio.value;
+            /*2. Construir el objeto producto según tipo*/
+            if (tipo == "Planta") {
+                let frutal = false;
+                let flor = false;
+                if (document.querySelector("#chkFlor:checked") != null) {
+                    flor = true;
+                }
+                if (document.querySelector("#chkFrutal:checked") != null) {
+                    frutal = true;
+                }
+                let nombre = gestionProductos.txtNombre.value;
+                let tamaño = gestionProductos.selectTamaño.value;
+                oPlantaNueva = new Planta(codigo, precio, nombre, frutal, flor, tamaño);
+                console.log(oPlantaNueva);
+                window.opener.modelo.actualizarProducto(codigo, oPlantaNueva);
+
+            } else if (tipo == "Maceta") {
+                let color = gestionProductos.txtColor.value;
+                let capacidad = gestionProductos.txtCapacidad.value;
+                let material = gestionProductos.txtMaterial.value;
+                oMacetaNueva = new Maceta(codigo, precio, color, capacidad, material);
+                window.opener.modelo.actualizarProducto(codigo, oMacetaNueva);
+            }
+            document.getElementById("listados").innerHTML = window.opener.modelo.listarProductos();
+        });
+
+        let btnBorrar = gestionProductos.btnBorrar;
+        btnBorrar.addEventListener('click', function (event) {
+            console.log("botón borrar clicado");
+            let codigo = gestionProductos.sel.value;
+            window.opener.modelo.borrarProducto(codigo);
+
+            document.getElementById("listados").innerHTML = window.opener.modelo.listarProductos();
+        });
+
+        var tProductos = window.opener.modelo.tProductos;
+
+        var oSelector = document.getElementById("selector");
+        let oOption;
+        for (let i = 0; i < tProductos.length; i++) {
+            oOption = document.createElement("OPTION");
+            oOption.value = tProductos[i].codigo;
+            oOption.textContent = tProductos[i].codigo;
+            oSelector.appendChild(oOption);
+        }
+        let oSelect = document.gestionProductos;
+        oSelect.appendChild(oSelector);
+
+
+
+    </script>
+</body>

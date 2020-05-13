@@ -1,0 +1,25 @@
+<productos>
+    <producto tipo="planta">
+        <codigo>1</codigo>
+        <precio>150</precio>
+        <nombre>Palmera Washingtonia Filifera</nombre>
+        <frutal>No</frutal>
+        <flor>No</flor>
+        <tamaño>Grande</tamaño>
+    </producto>
+    <producto tipo="planta">
+        <codigo>2</codigo>
+        <precio>14</precio>
+        <nombre>Naranjo Fukumoto</nombre>
+        <frutal>Si</frutal>
+        <flor>Si</flor>
+        <tamaño>Mediano</tamaño>
+    </producto>
+    <producto tipo="maceta">
+        <codigo>3</codigo>
+        <precio>7.20</precio>
+        <color>Blanco</color>
+        <material>Plástico</material>
+        <capacidad>50</capacidad>
+    </producto>
+</productos> 

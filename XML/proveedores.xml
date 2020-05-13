@@ -1,0 +1,17 @@
+<proveedores>
+    <proveedor>
+        <CIF>D8654585G</CIF>
+        <nombre>Matojo y socios SL</nombre>
+        <telefono>955887441</telefono>
+    </proveedor>
+    <proveedor>
+        <CIF>S5854568G</CIF>
+        <nombre>Hnos Plantajos SA</nombre>
+        <telefono>886554112</telefono>
+    </proveedor>
+    <proveedor>
+        <CIF>T5856965X</CIF>
+        <nombre>Plantaciones Rey</nombre>
+        <telefono>914523654</telefono>
+    </proveedor>
+</proveedores>

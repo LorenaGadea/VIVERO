@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Plantarum</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/mainStyle.css">
+    <link rel="icon" type="image/png" href="img/icon.png" sizes="16x16">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <style>
+        h2 {
+            margin-left: 2em;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container-fluid" id="main">
+        <div class="row col-12">
+            <div id="logo" class="col-lg-1 col-md-2 col-sm-12">
+                <img src="img/icon.png" width="160" alt="logotipo">
+            </div>
+            <div class="titulo col-lg-11 col-md-10 col-sm-12">PLANTARUM</div>
+        </div>
+    </div>
+    <h2>Pedidos por período</h2>
+    <!--Inyección de listados-->
+    <div class="section">
+        <div id="listados">
+        </div>
+        <div id="UD">
+            <form name="gestionPedido">
+                <select name="sel" id="selector"></select>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="txtCIFPedido">CIF</label>
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control" type="text" name="txtCIFPedido" id="txtCIFPedido" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="txtCodigoPedido">Código Producto</label>
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control" type="text" name="txtCodigoPedido" id="txtCodigoPedido" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="txtFechaPedido">Fecha</label>
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control" type="date" name="txtFechaPedido" id="txtFechaPedido" required>
+                    </div>
+                </div>
+                <input type="button" value="Borrar Venta" name="btnBorrar">
+                <input type="button" value="Modificar Venta" name="btnModificar">
+            </form>
+        </div>
+
+    </div>
+    </div>
+    </div>
+    <script src="JS/classes.js"></script>
+    <script>
+        let fechaIni = window.opener.frmPedidosPeriodo.txtFechaInicio.value;
+        let fechaFinal = window.opener.frmPedidosPeriodo.txtFechaFinal.value;
+        document.getElementById("listados").innerHTML = window.opener.modelo.listarPedidosPeriodo(fechaIni, fechaFinal);
+
+            fechaFinal));
+
+        let btnModificar = gestionPedido.btnModificar;
+        btnModificar.addEventListener('click', function (event) {
+            console.log("botón modificar clicado");
+            /*1.pillar cif */
+
+            let id = gestionPedido.sel.value;
+            /*2. Construir el objeto venta*/
+            let cif = gestionPedido.txtCIFPedido.value;
+            let codigo = gestionPedido.txtCodigoPedido.value;
+            let fecha = gestionPedido.txtFechaPedido.value;
+            oPedidoNuevo = window.opener.modelo.pedidoGenerado(cif, codigo, fecha);
+            oPedidoNuevo.id = id;
+            window.opener.modelo.actualizarPedido(id, oPedidoNuevo);
+            console.log(oPedidoNuevo);
+            document.getElementById("listados").innerHTML = window.opener.modelo.listarPedidosPeriodo(fechaIni, fechaFinal);
+          
+        };
+        let btnBorrar = gestionPedido.btnBorrar;
+        btnBorrar.addEventListener('click', function (event) {
+            console.log("botón borrar clicado");
+            let id = gestionPedido.sel.value;
+            window.opener.modelo.borrarPedido(id);
+
+            document.getElementById("listados").innerHTML = window.opener.modelo.listarPedidosPeriodo(fechaIni, fechaFinal);
+
+
+        var tPedidos = window.opener.modelo.tPedidos;
+
+        var oSelector = document.getElementById("selector");
+        let oOption;
+        for (let i = 0; i < tPedidos.length; i++) {
+            oOption = document.createElement("OPTION");
+            oOption.value = tPedidos[i].id;
+            oOption.textContent = tPedidos[i].id;
+            oSelector.appendChild(oOption);
+        }
+        let oSelect = document.gestionPedido;
+        oSelect.appendChild(oSelector);
+
+    </script>
+</body>

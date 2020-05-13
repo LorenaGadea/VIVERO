@@ -1,0 +1,35 @@
+[x] Añadir clases
+[x] Añadir métodos alta
+[x] Añadir métodos listar (proveedores)
+[x] Añadir métodos listar con filtro (pedidos periodo, alquileres activos)
+[x] Añadir formularios PEDIDO, ALQUILER, PROVEEDOR
+[x] Añadir RegEx
+[x] Sacar el comparar fechas
+[x] Calcular precio del alquiler
+[x] Ajustar el precio del alquiler
+[x] Arreglar el set interval de listados
+[] Arreglar el UML
+[x] Arreglar el enunciado
+[] Añadir cantidad a pedido y venta con subtotal??
+[x] Preparar xml de datos
+[x] Cargar xml
+[x] Eliminar alert de las clases
+[] Modificaciones 
+[] Eliminaciones
+[] GitHub
+[x] Claves autoincrementales para UD
+[x] innerHTML de listados
+[x] Los listadis no funcionan parámetros?
+[]arreglar alquileres
+
+REQUISITOS PARA LA PRÁCTICA DEL BLOQUE II
+[x] Formularios realizados en bootstrap
+[x] Entrega del modelo de objetos UML realizado en draw.io (formatos png y drawio)
+[] Proyecto subido en GitHub
+[x] Prohibición de uso de innerHTMLy outerHTML.en el código de la práctica 
+[x] Gestión de eventos mediante el método addEventListener
+[] Validaciones en todos los formularios con expresiones regulares.
+[x] Creación de las tablas HTML de los listados usando los métodos DOM
+[x] La práctica debe incorporar el proceso de uno o varios ficheros XML, se sugiere que se haga para incorporar datos de prueba iniciales
+[x] Implementación de las operaciones CRUD de al menos 6 objetos del modelo. La Recuperación de información se asume en los listados y las modificaciones.
+[x] Al menos 4 listados: dos de ellos sin filtros y dos de ellos con filtros.

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Plantarum</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/mainStyle.css">
+    <link rel="icon" type="image/png" href="img/icon.png" sizes="16x16">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-image: url("./img/fondo.jpg");
+        }
+
+        .oculto {
+            display: none;
+        }
+
+        #main {
+            padding-bottom: 10%;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container-fluid" id="main">
+        <div class="row col-12">
+            <div id="logo" class="col-lg-1 col-md-2 col-sm-12">
+                <img src="img/icon.png" width="160" alt="logotipo">
+            </div>
+            <div class="titulo col-lg-11 col-md-10 col-sm-12">PLANTARUM</div>
+        </div>
+
+        <div id="opciones" class="row section">
+            <div class="col-md-6" id="opcFormularios">
+                <legend>Altas </legend>
+                <div class="btn-group" role="group" aria-label="FormBtns">
+                    <button type="button" class="btn btn-dark btn-md" onclick="show_frmAltaProducto();">Nuevo
+                        Producto</button>
+                    <button type="button" class="btn btn-dark btn-md" onclick="show_frmAltaProveedor();">Nuevo
+                        Proveedor</button>
+                    <button type="button" class="btn btn-dark btn-md" onclick="show_frmAltaCliente();">Nuevo
+                        Cliente</button>
+                </div>
+                <br><br>
+                <div class="btn-group" role="group" aria-label="FormBtns">
+                    <button type="button" class="btn btn-dark btn-md" onclick="show_frmVenta();">Nueva Venta</button>
+                    <button type="button" class="btn btn-dark btn-md" onclick="show_frmAlquiler();">Nuevo
+                        Alquiler</button>
+                    <button type="button" class="btn btn-dark btn-md" onclick="show_frmPedido();">Nuevo Pedido</button>
+                </div>
+            </div>
+            <div class="col-md-6" id="opcListados">
+                <legend>Listados</legend>
+                <div class="btn-group" role="group" aria-label="FormBtns">
+                    <button type="button" class="btn btn-dark btn-md" onclick="show_lstClientes()">Clientes
+                        registrados</button>
+                    <button type="button" class="btn btn-dark btn-md" onclick="show_lstProveedores()">Proveedores
+                        registrados</button>
+                    <button type="button" class="btn btn-dark btn-md" onclick="show_lstProductos()">Productos
+                        registrados</button>
+                </div>
+                <br><br>
+                <div class="btn-group" role="group" aria-label="FormBtns">
+                    <button type="button" class="btn btn-dark btn-md" onclick="show_frmVentasPeriodo();">Ventas en
+                        período</button>
+                    <button type="button" class="btn btn-dark btn-md" onclick="show_frmPedidosPeriodo();">Pedidos en
+                        período</button>
+                    <button type="button" class="btn btn-dark btn-md" onclick="show_lstAlquilerActivo();">Alquileres
+                        activos</button>
+                    </div>
+            </div>
+        </div>
+        <div id="formularios" class="row section">
+            <!--PRODUCTO-->
+            <div id="divFrmAltaProducto" class="oculto col-12">
+                <form name="frmAltaProducto" id="frmAltaProducto">
+                    <h2>Nuevo producto</h2>
+                    <div class="form-row form-group">
+                        <div class="col-6">
+                            <label for="txtCodigo">Código</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtCodigo" id="txtCodigo" required>
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="col-6">
+                            <label for="txtPrecio">Precio (€)</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="number" min="0" step="0.01" name="txtPrecio"
+                                id="txtPrecio" required>
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="col-6">
+                            <label for="selectTipo">Tipo de Producto</label>
+                        </div>
+                        <div class="col-6">
+                            <select class="form-control" name="selectTipo" id="selectTipo"
+                                onchange="changed_selectTipo();" required>
+                                <option selected>Seleccione</option>
+                                <option>Planta</option>
+                                <option>Maceta</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--TIPO PLANTA-->
+                    <div id="condPlanta" class="oculto">
+                        <div class="form-row form-group">
+                            <div class="col-6">
+                                <label for="txtNombre">Nombre</label>
+                            </div>
+                            <div class="col-6">
+                                <input class="form-control" type="text" name="txtNombre" id="txtNombre">
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <div class="col-6">
+                                <label for="selectTamaño">Tamaño</label>
+                            </div>
+                            <div class="col-6">
+                                <select class="form-control" name="selectTamaño" id="selectTamaño">
+                                    <option selected>Seleccione</option>
+                                    <option>Pequeño</option>
+                                    <option>Mediano</option>
+                                    <option>Grande</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <div class="col-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="chkFlor" id="chkFlor">
+                                    <label class="form-check-label" for="chkFlor">Flor</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="chkFrutal" id="chkFrutal">
+                                    <label class="form-check-label" for="chkFrutal">Frutal</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--TIPO MACETA-->
+                    <div id="condMaceta" class="oculto">
+                        <div class="form-row form-group">
+                            <div class="col-6">
+                                <label for="txtColor">Color</label>
+                            </div>
+                            <div class="col-6">
+                                <input class="form-control" type="text" name="txtColor" id="txtColor">
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <div class="col-6">
+                                <label for="txtCapacidad">Capacidad (L)</label>
+                            </div>
+                            <div class="col-6">
+                                <input class="form-control" type="number" min="0" step="0.5" name="txtCapacidad"
+                                    id="txtCapacidad">
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <div class="col-6">
+                                <label for="txtMaterial">Material</label>
+                            </div>
+                            <div class="col-6">
+                                <input class="form-control" type="text" name="txtMaterial" id="txtMaterial">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <input class="btn btn-dark" type="button" value="Enviar" onclick="submit_frmAltaProducto();">
+                </form>
+                <script>
+                    // Ocultar/mostrar opciones del tipo de producto
+                    frmAltaProducto.selectTipo.selectedIndex = 0;
+                    function changed_selectTipo() {
+                        switch (frmAltaProducto.selectTipo.value) {
+                            case "Planta":
+                                document.getElementById("condPlanta").style.display = "block";
+                                document.getElementById("condMaceta").style.display = "none";
+                                break;
+                            case "Maceta":
+                                document.getElementById("condPlanta").style.display = "none";
+                                document.getElementById("condMaceta").style.display = "block";
+                                break;
+                            default:
+                                document.getElementById("condPlanta").style.display = "none";
+                                document.getElementById("condMaceta").style.display = "none";
+                        }
+                    }
+                </script>
+
+            </div>
+
+            <!--CLIENTE-->
+            <div id="divFrmAltaCliente" class="oculto col-12">
+                <form class="form-horizontal needs-validation" name="frmAltaCliente" id="frmAltaCliente">
+                    <h2>Alta de Cliente</h2>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtNIF">NIF</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtNIF" id="txtNIF" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtNombre">Nombre</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtNombre" id="txtNombre" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtApellido">Apellido</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtApellido" id="txtApellido" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtTelefono">Teléfono</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="tel" name="txtTelefono" id="txtTelefono" required>
+                        </div>
+                    </div>
+                    <br>
+                    <input class="btn btn-dark" type="button" value="Enviar" onclick="submit_frmAltaCliente()">
+                </form>
+            </div>
+
+            <!--PROVEEDOR-->
+            <div id="divFrmAltaProveedor" class="oculto col-12">
+                <form class="form-horizontal needs-validation" name="frmAltaProveedor" id="frmAltaProveedor">
+                    <h2>Alta de Proveedor</h2>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtCIF">CIF</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtCIF" id="txtCIF" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtNombre">Nombre</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtNombre" id="txtNombre" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtTelefono">Teléfono</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="tel" name="txtTelefono" id="txtTelefono" required>
+                        </div>
+                    </div>
+                    <br>
+                    <input class="btn btn-dark" type="button" value="Enviar" onclick="submit_frmAltaProveedor()">
+                </form>
+            </div>
+
+            <!--VENTA-->
+            <div id="divFrmVenta" class="oculto col-12">
+                <form class="form-horizontal" name="frmVenta" id="frmVenta">
+                    <h2>Venta</h2>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtNIFVenta">NIF</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtNIFVenta" id="txtNIFVenta" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtCodigoVenta">Código Producto</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtCodigoVenta" id="txtCodigoVenta" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtFechaVenta">Fecha</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="date" name="txtFechaVenta" id="txtFechaVenta" required>
+                        </div>
+                    </div>
+                    <br>
+                    <input class="btn btn-dark" type="button" value="Enviar" onclick="submit_frmVenta();">
+                </form>
+            </div>
+
+            <!--PEDIDO-->
+            <div id="divFrmPedido" class="oculto col-12">
+                <form class="form-horizontal" name="frmPedido" id="frmPedido">
+                    <h2>Pedido</h2>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtCIFPedido">CIF</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtCIFPedido" id="txtCIFPedido" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtCodigoPedido">Código Producto</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtCodigoPedido" id="txtCodigoPedido"
+                                required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtFechaPedido">Fecha</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="date" name="txtFechaPedido" id="txtFechaPedido" required>
+                        </div>
+                    </div>
+                    <br>
+                    <input class="btn btn-dark" type="button" value="Enviar" onclick="submit_frmPedido();">
+                </form>
+            </div>
+
+            <!--ALQUILER-->
+            <div id="divFrmAlquiler" class="oculto col-12">
+                <form class="form-horizontal" name="frmAlquiler" id="frmAlquiler">
+                    <h2>Alquiler</h2>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtNIFAlquiler">NIF</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtNIFAlquiler" id="txtNIFAlquiler" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtCodigoAlquiler">Código Producto</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtCodigoAlquiler" id="txtCodigoAlquiler"
+                                required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtFechaInicio">Fecha Inicio</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="date" name="txtFechaInicio" id="txtFechaInicio" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtFechaFin">Fecha Fin</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="date" name="txtFechaFin" id="txtFechaFin" required>
+                        </div>
+                    </div>
+                    <br>
+                    <input class="btn btn-dark" type="button" value="Enviar" onclick="submit_frmAlquiler();">
+                </form>
+            </div>
+
+
+            <!--VENTAS EN PERIODO-->
+            <div id="divFrmVentasPeriodo" class="oculto col-12">
+                <form class="form-horizontal" name="frmVentasPeriodo" id="frmVentasPeriodo">
+                    <h2>Ventas por periodo</h2>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtFechaInicio">Fecha inicial</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="date" name="txtFechaInicio" id="txtFechaInicio">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtFechaFinal">Fecha final</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="date" name="txtFechaFinal" id="txtFechaFinal">
+                        </div>
+                    </div>
+                    <br>
+                    <input class="btn btn-dark" type="button" value="Enviar" onclick="submit_frmVentasPeriodo();">
+                </form>
+            </div>
+
+            <!--PEDIDOS EN PERIODO-->
+            <div id="divFrmPedidosPeriodo" class="oculto col-12">
+                <form class="form-horizontal" name="frmPedidosPeriodo" id="frmPedidosPeriodo">
+                    <h2>Pedidos por periodo</h2>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtFechaInicio">Fecha inicial</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="date" name="txtFechaInicio" id="txtFechaInicio">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtFechaFinal">Fecha final</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="date" name="txtFechaFinal" id="txtFechaFinal">
+                        </div>
+                    </div>
+                    <br>
+                    <input class="btn btn-dark" type="button" value="Enviar" onclick="submit_frmPedidosPeriodo();">
+                </form>
+            </div>
+
+        </div>
+
+
+    </div>
+
+        <script src="JS/classes.js"></script>
+        <script src="JS/formControl.js"></script>
+        <script>
+            var modelo = new Vivero([], [], [], [], [], []);
+            modelo.cargarDatos();
+        </script>
+</body>
+
+</html>

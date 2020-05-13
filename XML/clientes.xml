@@ -1,0 +1,20 @@
+<clientes>
+    <cliente >
+        <NIF>78784751A</NIF>
+        <nombre>Raquel</nombre>
+        <apellidos>Castaño</apellidos>
+        <telefono>955456258</telefono>
+    </cliente>
+    <cliente>
+        <NIF>41465278F</NIF>
+        <nombre>David</nombre>
+        <apellidos>Ceballos</apellidos>
+        <telefono>658852221</telefono>
+    </cliente>
+    <cliente>
+        <NIF>98452678D</NIF>
+        <nombre>Alejandro</nombre>
+        <apellidos>Guzmán</apellidos>
+        <telefono>954412652</telefono>
+    </cliente>
+</clientes>

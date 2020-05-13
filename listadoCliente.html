@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Plantarum</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/mainStyle.css">
+    <link rel="icon" type="image/png" href="img/icon.png" sizes="16x16">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <style>
+        h2 {
+            margin-left: 2em;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container-fluid" id="main">
+        <div class="row col-12">
+            <div id="logo" class="col-lg-1 col-md-2 col-sm-12">
+                <img src="img/icon.png" width="160" alt="logotipo">
+            </div>
+            <div class="titulo col-lg-11 col-md-10 col-sm-12">PLANTARUM</div>
+        </div>
+    </div>
+    <h2>Clientes registrados</h2>
+    <!--Inyección de listados-->
+    <div class="section">
+        <div id="listados">
+
+        </div>
+        <div id="UD">
+            <h2>Gestión de clientes</h2>
+            <form name="gestionClientes">
+	      <select name="selNIF" id="selector"></select>
+
+              <div class="row">
+                <div class="col-6">
+                  <label for="txtNombre">Nombre</label>
+                </div>
+                <div class="col-6">
+                  <input class="form-control" type="text" name="txtNombre" id="txtNombre" required><label id=""></label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label for="txtApellido">Apellido</label>
+                </div>
+                <div class="col-6">
+                  <input class="form-control" type="text" name="txtApellido" id="txtApellido" required><label id=""></label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label for="txtTelefono">Teléfono</label>
+                </div>
+                <div class="col-6">
+                  <input class="form-control" type="tel" name="txtTelefono" id="txtTelefono" required><label id=" "></label>
+                </div>
+              </div>
+	            <input type="button" value="Borrar Cliente" name="btnBorrar">
+              <input type="button" value="Modificar Cliente" name="btnModificar">
+            </form>
+        </div>
+    </div>
+</div>
+<script src="JS/classes.js"></script>
+    <script>
+      
+      document.getElementById("listados").innerHTML = window.opener.modelo.listarClientes();
+
+      let btnModificar=gestionClientes.btnModificar;
+      btnModificar.addEventListener('click',function(event){
+	  console.log("botón modificar clicado");
+	  /*1.pillar nif */
+	  let nif=gestionClientes.selNIF.value;
+	  /*2. Construir el objeto cliente*/
+	  let nombre =gestionClientes.txtNombre.value;
+	  let apellido = gestionClientes.txtApellido.value;
+	  let telefono = gestionClientes.txtTelefono.value;
+	  oClienteNuevo =new Cliente(nif, nombre, apellido, telefono);
+	  
+	  window.opener.modelo.actualizarCliente(nif, oClienteNuevo);
+	  
+	  document.getElementById("listados").innerHTML = window.opener.modelo.listarClientes();
+      });
+      let btnBorrar=gestionClientes.btnBorrar;
+      btnBorrar.addEventListener('click',function(event){
+	  console.log("botón borrar clicado");
+	  let nif=gestionClientes.selNIF.value;
+	  window.opener.modelo.borrarCliente(nif);
+	  
+	  document.getElementById("listados").innerHTML = window.opener.modelo.listarClientes();
+      });
+      
+        var tClientes = window.opener.modelo.tClientes;
+
+        var oSelector = document.getElementById("selector");
+        let oOption;
+        for (let i = 0; i < tClientes.length; i++) {
+            oOption = document.createElement("OPTION");
+            oOption.value = tClientes[i].nif;
+            oOption.textContent = tClientes[i].nif;
+            oSelector.appendChild(oOption);
+        }
+        let oSelect = document.gestionClientes;
+        oSelect.appendChild(oSelector);
+
+    </script>
+</body>

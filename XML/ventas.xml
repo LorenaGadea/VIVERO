@@ -1,0 +1,17 @@
+<ventas>
+    <venta >
+        <NIF>78784751A</NIF>
+        <codigo>1</codigo>        
+        <fecha>04/04/2020</fecha>
+    </venta>
+    <venta>
+        <NIF>78784751A</NIF>
+        <codigo>2</codigo>
+        <fecha>03/10/2012</fecha>
+    </venta>
+    <venta>
+        <NIF>98452678D</NIF>
+        <codigo>1</codigo>
+        <fecha>01/02/2020</fecha>
+    </venta>
+</ventas>

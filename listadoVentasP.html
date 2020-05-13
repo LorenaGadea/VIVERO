@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Plantarum</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/mainStyle.css">
+    <link rel="icon" type="image/png" href="img/icon.png" sizes="16x16">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <style>
+        h2 {
+            margin-left: 2em;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container-fluid" id="main">
+        <div class="row col-12">
+            <div id="logo" class="col-lg-1 col-md-2 col-sm-12">
+                <img src="img/icon.png" width="160" alt="logotipo">
+            </div>
+            <div class="titulo col-lg-11 col-md-10 col-sm-12">PLANTARUM</div>
+        </div>
+    </div>
+    <h2>Ventas en periodo</h2>
+    <!--Inyección de listados-->
+    <div class="section">
+        <div id="listados">
+        </div>
+        <div id="UD">
+            <div id="divFrmVenta" class="oculto col-12">
+                <h2>Gestión de Ventas</h2>
+                <form name="gestionVenta">
+                    <select name="sel" id="selector"></select>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtNIFVenta">NIF</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtNIFVenta" id="txtNIFVenta" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtCodigoVenta">Código Producto</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="txtCodigoVenta" id="txtCodigoVenta" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="txtFechaVenta">Fecha</label>
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" type="date" name="txtFechaVenta" id="txtFechaVenta" required>
+                        </div>
+                    </div>
+                    <br>
+                    <input type="button" value="Borrar Venta" name="btnBorrar">
+                    <input type="button" value="Modificar Venta" name="btnModificar">
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="JS/classes.js"></script>
+    <script>
+        let fechaIni = window.opener.frmVentasPeriodo.txtFechaInicio.value;
+      let fechaFinal = window.opener.frmVentasPeriodo.txtFechaFinal.value;
+          document.getElementById("listados").innerHTML = window.opener.modelo.listarVentasPeriodo(fechaIni, fechaFinal);
+  
+        let btnModificar=gestionVenta.btnModificar;
+        btnModificar.addEventListener('click',function(event){
+        console.log("botón modificar clicado");
+        /*1.pillar nif */
+        
+        let id=gestionVenta.sel.value;
+        /*2. Construir el objeto venta*/
+        let nif =gestionVenta.txtNIFVenta.value;
+        let codigo = gestionVenta.txtCodigoVenta.value;
+        let fecha = gestionVenta.txtFechaVenta.value;
+        oVentaNueva =  window.opener.modelo.ventaGenerada(nif,codigo,fecha);
+        oVentaNueva.id=id;
+        window.opener.modelo.actualizarVenta(id, oVentaNueva);
+        
+        document.getElementById("listados").innerHTML = window.opener.modelo.listarVentasPeriodo(fechaIni, fechaFinal);
+        });
+        let btnBorrar=gestionVenta.btnBorrar;
+        btnBorrar.addEventListener('click',function(event){
+        console.log("botón borrar clicado");
+        let id=gestionVenta.sel.value;
+        window.opener.modelo.borrarVenta(id);
+        
+        document.getElementById("listados").innerHTML = window.opener.modelo.listarVentasPeriodo(fechaIni, fechaFinal);
+        });
+        
+          var tVentas = window.opener.modelo.tVentas;
+  
+          var oSelector = document.getElementById("selector");
+          let oOption;
+          for (let i = 0; i < tVentas.length; i++) {
+              oOption = document.createElement("OPTION");
+              oOption.value = tVentas[i].id;
+              oOption.textContent = tVentas[i].id;
+              oSelector.appendChild(oOption);
+          }
+          let oSelect = document.gestionVenta;
+          oSelect.appendChild(oSelector);
+  
+      </script>
+</body>

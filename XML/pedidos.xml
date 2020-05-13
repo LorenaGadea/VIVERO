@@ -1,0 +1,17 @@
+<pedidos>
+    <pedido >
+        <CIF>S5854568G</CIF>
+        <codigo>1</codigo>        
+        <fecha>03/05/2020</fecha>
+    </pedido>
+    <pedido>
+        <CIF>S5854568G</CIF>
+        <codigo>2</codigo>
+        <fecha>03/05/2012</fecha>
+    </pedido>
+    <pedido>
+        <CIF>T5856965X</CIF>
+        <codigo>1</codigo>
+        <fecha>03/05/2020</fecha>
+    </pedido>
+</pedidos>
